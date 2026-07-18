@@ -14,8 +14,10 @@ export function Work() {
       </Reveal>
 
       <div className="mt-10 grid gap-6 md:grid-cols-2">
-        {projects.map((p, i) => (
-          <Reveal key={p.domain} delay={i * 120}>
+        {projects.map((p, i) => {
+          const wide = projects.length % 2 === 1 && i === projects.length - 1;
+          return (
+          <Reveal key={p.domain} delay={i * 120} className={wide ? "md:col-span-2" : ""}>
             <a
               href={p.url}
               target="_blank"
@@ -29,7 +31,9 @@ export function Work() {
                   width={1800}
                   height={1125}
                   unoptimized
-                  className="aspect-[16/10] w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  className={`w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03] ${
+                    wide ? "aspect-[16/10] md:aspect-[21/9]" : "aspect-[16/10]"
+                  }`}
                 />
               </div>
               <div className="p-6">
@@ -60,7 +64,8 @@ export function Work() {
               </div>
             </a>
           </Reveal>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
