@@ -36,36 +36,54 @@ function ProjectCard({
   animateTarget,
 }: ProjectCardProps) {
   const dragControls = useDragControls();
+  const [isDragging, setIsDragging] = useState(false);
 
+  // Two layers, deliberately: the OUTER div owns the card's resting position
+  // (x/y/scale/rotate via `animate`); the INNER div owns dragging. Drag hijacks
+  // the x/y motion values it lives on, and `dragSnapToOrigin` resets them to 0 —
+  // so if they shared one element, an interrupted gesture (e.g. tapping to open
+  // a link, which backgrounds the tab mid-pointer) would strand the card at the
+  // origin (screen centre) instead of its slot. Keeping drag on the inner layer
+  // means snap-to-origin returns to 0,0 *within* the outer — the correct slot —
+  // and the outer's layout x/y is never touched by the drag.
   return (
     <motion.div
-      drag={isFolderOpen}
-      dragListener={false}
-      dragControls={dragControls}
-      dragSnapToOrigin={true}
-      onPointerDown={(e) => {
-        if (isFolderOpen) dragControls.start(e, { distanceThreshold: DRAG_ENGAGE_THRESHOLD });
-      }}
-      onDragEnd={(e, info) => onCloseDrag(info)}
-      onTap={onOpenProject}
-      onHoverStart={onHoverStart}
-      onHoverEnd={onHoverEnd}
-      className={`absolute bottom-0 h-80 w-64 origin-bottom overflow-hidden rounded-xl border border-line bg-paper shadow-[0_20px_40px_rgba(20,32,44,0.3)] ${isFolderOpen ? "pointer-events-auto cursor-grab active:cursor-grabbing" : "pointer-events-none"}`}
-      animate={animateTarget}
-      whileDrag={isFolderOpen ? { scale: (animateTarget.scale ?? 1) + 0.08, rotate: 5, zIndex: 150 } : {}}
+      className={`absolute bottom-0 h-80 w-64 origin-bottom ${isFolderOpen ? "pointer-events-auto" : "pointer-events-none"}`}
+      animate={{ ...animateTarget, zIndex: isDragging ? 150 : animateTarget.zIndex }}
       transition={{ type: "spring", stiffness: 350, damping: 30 }}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={p.image} alt={`Screenshot of ${p.name}`} className="pointer-events-none h-44 w-full object-cover object-top" />
-      <div className="pointer-events-none flex h-36 flex-col px-4 py-3 text-left">
-        <p className="font-display text-lg font-semibold tracking-tight text-ink">
-          {p.name}
-        </p>
-        <p className="mt-1 line-clamp-3 text-xs leading-relaxed text-ink-soft">
-          {p.blurb}
-        </p>
-        <p className="mt-auto text-[11px] text-ink-faint">{p.domain}</p>
-      </div>
+      <motion.div
+        drag={isFolderOpen}
+        dragListener={false}
+        dragControls={dragControls}
+        dragSnapToOrigin={true}
+        onPointerDown={(e) => {
+          if (isFolderOpen) dragControls.start(e, { distanceThreshold: DRAG_ENGAGE_THRESHOLD });
+        }}
+        onDragStart={() => setIsDragging(true)}
+        onDragEnd={(e, info) => {
+          setIsDragging(false);
+          onCloseDrag(info);
+        }}
+        onTap={onOpenProject}
+        onHoverStart={onHoverStart}
+        onHoverEnd={onHoverEnd}
+        className={`h-full w-full origin-bottom overflow-hidden rounded-xl border border-line bg-paper shadow-[0_20px_40px_rgba(20,32,44,0.3)] ${isFolderOpen ? "cursor-grab active:cursor-grabbing" : ""}`}
+        whileDrag={isFolderOpen ? { scale: 1.08, rotate: 5 } : {}}
+        transition={{ type: "spring", stiffness: 350, damping: 30 }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={p.image} alt={`Screenshot of ${p.name}`} className="pointer-events-none h-44 w-full object-cover object-top" />
+        <div className="pointer-events-none flex h-36 flex-col px-4 py-3 text-left">
+          <p className="font-display text-lg font-semibold tracking-tight text-ink">
+            {p.name}
+          </p>
+          <p className="mt-1 line-clamp-3 text-xs leading-relaxed text-ink-soft">
+            {p.blurb}
+          </p>
+          <p className="mt-auto text-[11px] text-ink-faint">{p.domain}</p>
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
