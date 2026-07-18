@@ -28,6 +28,15 @@ export const projects: Project[] = [
     url: "https://6gc.com.au/",
     image: "/projects/6gc.jpg",
   },
+  {
+    name: "Spikizi",
+    domain: "spikizi.net",
+    blurb:
+      "An English speaking academy platform. Lessons, flashcards, teacher bookings and live AI speaking practice in one portal.",
+    tags: ["Web app", "AI", "Education"],
+    url: "https://spikizi.net/",
+    image: "/projects/spikizi.jpg",
+  },
 ];
 
 export const services = [
