@@ -92,9 +92,10 @@
   animation: ring-phase-b 16s linear infinite;
 }
 
+/* no scrollbar-gutter reservation: on pages short enough to skip the
+   scrollbar it renders as a dead strip that dark sections cannot paint */
 html {
   scroll-behavior: smooth;
-  scrollbar-gutter: stable;
 }
 
 body {
@@ -131,27 +132,6 @@ body::before {
   border-radius: 2px;
 }
 
-/* carousel track: no visible scrollbar */
-.no-scrollbar {
-  scrollbar-width: none;
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-/* scroll reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal.is-in {
-  opacity: 1;
-  transform: none;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
@@ -159,5 +139,4 @@ body::before {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  .reveal { opacity: 1; transform: none; }
 }

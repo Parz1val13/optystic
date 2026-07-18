@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
 
 const variants = {
@@ -29,20 +28,18 @@ export function ButtonLink({
   external?: boolean;
 }) {
   const cls = `inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium tracking-wide transition-all duration-300 hover:-translate-y-0.5 ${variants[variant]} ${sizes[size]} ${className}`;
-  if (external) {
-    const newTab = href.startsWith("mailto:")
-      ? {}
-      : { target: "_blank", rel: "noopener noreferrer" };
-    return (
-      <a href={href} {...newTab} className={cls}>
-        {children}
-      </a>
-    );
-  }
+  // plain anchors on purpose: Next 16's static-export client router 404s on
+  // its segment payloads (__next.<seg>.__PAGE__.txt vs the nested file it
+  // writes), so soft navigation silently keeps the old page. Full loads on a
+  // two-page static site are correct and fast.
+  const newTab =
+    external && !href.startsWith("mailto:")
+      ? { target: "_blank", rel: "noopener noreferrer" }
+      : {};
   return (
-    <Link href={href} className={cls}>
+    <a href={href} {...newTab} className={cls}>
       {children}
-    </Link>
+    </a>
   );
 }
 

@@ -1,0 +1,110 @@
+/* Styles for the /v2 preview only. Imported by src/app/v2/layout.tsx. */
+
+/*
+ * Scroll reveal, visible by default: no-JS visitors (or a broken observer)
+ * always get a full page. JS adds .v2-armed right before observing.
+ */
+.v2-reveal {
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.v2-reveal.v2-armed {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.v2-reveal.v2-armed.v2-from-left {
+  transform: translateX(-30px);
+}
+
+.v2-reveal.v2-armed.v2-from-right {
+  transform: translateX(30px);
+}
+
+.v2-reveal.v2-armed.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Per-word headline entrance. Pure CSS so it also runs without JS. */
+.v2-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.45em);
+  animation: v2-word 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(var(--i) * 90ms + 120ms);
+}
+
+@keyframes v2-word {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* MagicUI line-shadow-text animation (the vendored component uses the
+   v2-line-shadow class because this project has no custom animation
+   utilities registered with Tailwind). */
+.v2-line-shadow::after {
+  animation: line-shadow 15s linear infinite;
+}
+
+@keyframes line-shadow {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% -100%;
+  }
+}
+
+/*
+ * Shooting stars, every ~5.5s per streak. The rotation matches the travel
+ * angle (atan2(200, 380) ~= 28deg).
+ */
+.v2-shoot {
+  opacity: 0;
+  animation: v2-shoot 5.5s linear infinite;
+}
+
+@keyframes v2-shoot {
+  0%,
+  4% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(28deg);
+  }
+  8% {
+    opacity: 0.9;
+  }
+  18%,
+  100% {
+    opacity: 0;
+    transform: translate(380px, 200px) rotate(28deg);
+  }
+}
+
+/* Process timeline nodes light up as the drawn line passes them. */
+.v2-node {
+  transition: background-color 0.4s ease, color 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.v2-lit .v2-node {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+/* Peach hover underline for quiet links. */
+.v2-link {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+  transition: text-decoration-color 0.25s ease, color 0.25s ease;
+}
+
+.v2-link:hover {
+  text-decoration-color: var(--peach);
+}

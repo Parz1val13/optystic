@@ -1,8 +1,7 @@
-import Link from "next/link";
-import { Planet } from "./planet";
+import { Planet } from "../planet";
 
-/* Wordmark lockup: the planet plays the O in OPTYSTIC. */
-export function Logo({
+/* V2 wordmark lockup: the real brand planet plays the O, same as v1. */
+export function Logo2({
   id,
   className = "text-2xl",
   light = false,
@@ -12,7 +11,7 @@ export function Logo({
   light?: boolean;
 }) {
   return (
-    <Link
+    <a
       href="/"
       aria-label="Optystic, back to start"
       className={`group inline-flex items-center whitespace-nowrap font-display leading-none ${
@@ -24,6 +23,6 @@ export function Logo({
         className="h-[1.4em] w-[1.4em] shrink-0 -translate-y-[0.05em] -mr-[0.06em] transition-transform duration-700 ease-out group-hover:rotate-[14deg]"
       />
       <span className="font-semibold tracking-tight">PTYSTIC</span>
-    </Link>
+    </a>
   );
 }

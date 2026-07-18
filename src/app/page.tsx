@@ -1,23 +1,23 @@
-import { Footer } from "@/components/footer";
-import { Nav } from "@/components/nav";
-import { Cta } from "@/components/sections/cta";
-import { Hero } from "@/components/sections/hero";
-import { Process } from "@/components/sections/process";
-import { Services } from "@/components/sections/services";
-import { Work } from "@/components/sections/work";
+import { Hero2 } from "@/components/v2/hero2";
+import { Nav2 } from "@/components/v2/nav2";
+import { NightEnding } from "@/components/v2/night-ending";
+import { Process2 } from "@/components/v2/process2";
+import { ScrollRing } from "@/components/v2/scroll-ring";
+import { Services2 } from "@/components/v2/services2";
+import { Work2 } from "@/components/v2/work2";
 
 export default function Home() {
   return (
     <>
-      <Nav />
+      <Nav2 />
       <main className="flex-1">
-        <Hero />
-        <Work />
-        <Services />
-        <Process />
-        <Cta />
+        <Hero2 />
+        <Work2 />
+        <Services2 />
+        <Process2 />
       </main>
-      <Footer />
+      <NightEnding />
+      <ScrollRing />
     </>
   );
 }

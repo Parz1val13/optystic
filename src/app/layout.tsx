@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Figtree } from "next/font/google";
+import { FaviconAnimator } from "@/components/v2/favicon-animator";
 import "./globals.css";
+import "./effects.css";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -14,13 +16,13 @@ const figtree = Figtree({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://optystic.com"),
-  title: "Optystic | Websites and software, built properly",
+  title: "Optystic",
   description:
-    "Optystic builds websites, web apps and automations. You talk directly to the person who builds it, and every project shown is live.",
+    "Crafted with purpose. Optystic builds websites, web apps and AI automation: design, development and launch, handled end to end.",
   openGraph: {
-    title: "Optystic | Websites and software, built properly",
+    title: "Optystic",
     description:
-      "Websites, web apps and automations, built properly by Optystic.",
+      "Crafted with purpose. Websites, web apps and AI automation, built end to end.",
     url: "https://optystic.com",
     siteName: "Optystic",
     type: "website",
@@ -41,7 +43,10 @@ export default function RootLayout({
       lang="en"
       className={`${bricolage.variable} ${figtree.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <FaviconAnimator />
+      </body>
     </html>
   );
 }
