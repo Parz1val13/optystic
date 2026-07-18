@@ -70,6 +70,9 @@ export function WorkFolder() {
                       setHoverFolder(false);
                     }
                   }}
+                  onTap={() => {
+                    if (isFolderOpen) window.open(p.url, "_blank", "noopener,noreferrer");
+                  }}
                   className={`absolute bottom-0 h-80 w-64 origin-bottom overflow-hidden rounded-xl border border-line bg-paper shadow-[0_20px_40px_rgba(20,32,44,0.3)] ${isFolderOpen ? "pointer-events-auto cursor-grab active:cursor-grabbing" : "pointer-events-none"}`}
                   animate={!isFolderOpen ? {
                     y: stackY,
