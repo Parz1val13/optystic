@@ -14,6 +14,7 @@ const dragHintText = "Drag any project down to close";
 export function WorkFolder() {
   const [isFolderOpen, setIsFolderOpen] = useState(false);
   const [hoverFolder, setHoverFolder] = useState(false);
+  const [hoveredDomain, setHoveredDomain] = useState<string | null>(null);
   const [wide, setWide] = useState(true);
 
   useEffect(() => {
@@ -71,8 +72,12 @@ export function WorkFolder() {
                     }
                   }}
                   onTap={() => {
-                    if (isFolderOpen) window.open(p.url, "_blank", "noopener,noreferrer");
+                    if (!isFolderOpen) return;
+                    setHoveredDomain(null);
+                    window.open(p.url, "_blank", "noopener,noreferrer");
                   }}
+                  onHoverStart={() => setHoveredDomain(p.domain)}
+                  onHoverEnd={() => setHoveredDomain(null)}
                   className={`absolute bottom-0 h-80 w-64 origin-bottom overflow-hidden rounded-xl border border-line bg-paper shadow-[0_20px_40px_rgba(20,32,44,0.3)] ${isFolderOpen ? "pointer-events-auto cursor-grab active:cursor-grabbing" : "pointer-events-none"}`}
                   animate={!isFolderOpen ? {
                     y: stackY,
@@ -84,10 +89,9 @@ export function WorkFolder() {
                     y: openY,
                     x: openX,
                     rotate: openRotate,
-                    scale: openScale,
-                    zIndex: 50
+                    scale: hoveredDomain === p.domain ? openScale + 0.05 : openScale,
+                    zIndex: hoveredDomain === p.domain ? 100 : 50
                   }}
-                  whileHover={isFolderOpen ? { scale: openScale + 0.05, zIndex: 100 } : {}}
                   whileDrag={isFolderOpen ? { scale: openScale + 0.08, rotate: 5, zIndex: 150 } : {}}
                   transition={{ type: "spring", stiffness: 350, damping: 30 }}
                 >
