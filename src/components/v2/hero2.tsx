@@ -15,7 +15,7 @@ export function Hero2() {
         {/* box sized with the fov so the whole halo fits: no edge ever cuts
             the circle; the negative top margin eats the canvas's own
             transparent air so the scene sits close under the nav */}
-        <MoonHero className="-mt-8 h-[480px] w-[min(96vw,820px)] sm:-mt-12 sm:h-[640px] sm:w-[min(96vw,1180px)]" />
+        <MoonHero className="-mt-4 h-[340px] w-full sm:-mt-12 sm:h-[640px] sm:w-[min(96vw,1180px)]" />
 
         <h1 className="relative mt-6 max-w-4xl font-display text-[clamp(2.4rem,6.2vw,4.5rem)] font-semibold leading-[1.06] tracking-tight sm:mt-10">
           {WORDS.map((w, i) => (

@@ -80,13 +80,10 @@ export function Nav2() {
           <a
             href="/contact"
             onClick={() => setOpen(false)}
-            className="border-b border-line-soft py-4 font-display text-xl font-semibold text-ink"
+            className="py-4 font-display text-xl font-semibold text-ink"
           >
             Contact
           </a>
-          <ButtonLink href="/contact" className="mt-6">
-            Get a consultation
-          </ButtonLink>
         </div>
       )}
     </header>
