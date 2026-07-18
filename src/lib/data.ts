@@ -30,14 +30,6 @@ export const projects: Project[] = [
   },
 ];
 
-/* TODO(Hadi): confirm these numbers, they are placeholders */
-export const stats = [
-  { value: 6, suffix: "+", label: "Years building" },
-  { value: 20, suffix: "+", label: "Projects shipped" },
-  { value: 12, suffix: "+", label: "Clients who came back" },
-  { value: 8, suffix: "", label: "Products live right now" },
-];
-
 export const services = [
   {
     title: "Websites",
