@@ -23,7 +23,7 @@ export function Logo({
         id={id}
         className="h-[1.4em] w-[1.4em] shrink-0 -translate-y-[0.05em] -mr-[0.06em] transition-transform duration-700 ease-out group-hover:rotate-[14deg]"
       />
-      <span className="tracking-[0.03em]">PTYSTIC</span>
+      <span className="font-semibold tracking-tight">PTYSTIC</span>
     </Link>
   );
 }

@@ -21,7 +21,6 @@
   --planet-deep: #1f4978;
   --sky: #a4dff3;
   --peach: #ffd5b8;
-  --ember: #a8501d;
 }
 
 @theme inline {
@@ -41,21 +40,13 @@
   --color-planet-deep: var(--planet-deep);
   --color-sky: var(--sky);
   --color-peach: var(--peach);
-  --color-ember: var(--ember);
 
-  --font-sans: var(--font-inter-tight), system-ui, sans-serif;
-  --font-display: var(--font-marcellus), Georgia, serif;
-  --font-accent: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-figtree), system-ui, sans-serif;
+  --font-display: var(--font-bricolage), system-ui, sans-serif;
 
-  --animate-marquee: marquee 60s linear infinite;
   --animate-twinkle: twinkle 5s ease-in-out infinite;
   --animate-drift: drift 8s ease-in-out infinite;
   --animate-spin-slow: spin 40s linear infinite;
-}
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
 }
 
 @keyframes twinkle {
@@ -66,6 +57,39 @@
 @keyframes drift {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-14px); }
+}
+
+/*
+ * Planet ring rotation. ry collapses to 0 at the quarter turns (ring seen
+ * edge on) while the front/back halves swap, so the loop is seamless.
+ */
+@keyframes ring-turn {
+  0%, 50%, 100% { ry: 36px; }
+  25%, 75% { ry: 0px; }
+}
+
+@keyframes ring-phase-a {
+  0%, 24.9% { opacity: 1; }
+  25%, 74.9% { opacity: 0; }
+  75%, 100% { opacity: 1; }
+}
+
+@keyframes ring-phase-b {
+  0%, 24.9% { opacity: 0; }
+  25%, 74.9% { opacity: 1; }
+  75%, 100% { opacity: 0; }
+}
+
+.ring-anim {
+  animation: ring-turn 16s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
+
+.ring-phase-a {
+  animation: ring-phase-a 16s linear infinite;
+}
+
+.ring-phase-b {
+  animation: ring-phase-b 16s linear infinite;
 }
 
 html {
@@ -118,15 +142,6 @@ body::before {
 .reveal.is-in {
   opacity: 1;
   transform: none;
-}
-
-/* marquee pause on hover */
-.marquee-track {
-  animation: var(--animate-marquee);
-}
-
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {

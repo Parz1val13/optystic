@@ -92,12 +92,3 @@ export function CornerMarks({ light = false }: { light?: boolean }) {
     </span>
   );
 }
-
-/* Accent word inside a display heading, set in italic Cormorant. */
-export function Accent({ children }: { children: ReactNode }) {
-  return (
-    <em className="font-accent font-medium italic text-planet-deep">
-      {children}
-    </em>
-  );
-}

@@ -1,34 +1,26 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant, Inter_Tight, Marcellus } from "next/font/google";
+import { Bricolage_Grotesque, Figtree } from "next/font/google";
 import "./globals.css";
 
-const marcellus = Marcellus({
-  variable: "--font-marcellus",
-  weight: "400",
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
 });
 
-const interTight = Inter_Tight({
-  variable: "--font-inter-tight",
-  subsets: ["latin"],
-});
-
-const cormorant = Cormorant({
-  variable: "--font-cormorant",
-  style: "italic",
-  weight: ["400", "500"],
+const figtree = Figtree({
+  variable: "--font-figtree",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://optystic.com"),
-  title: "Optystic | Web and AI Studio",
+  title: "Optystic | Web studio",
   description:
-    "Optystic is an independent studio that designs and builds websites, web apps and AI agents that do real work. Every project here is live on the internet.",
+    "Optystic is a small studio that designs and builds websites, web apps and automations. You deal directly with the builder, and every project here is live.",
   openGraph: {
-    title: "Optystic | Web and AI Studio",
+    title: "Optystic | Web studio",
     description:
-      "Websites, web apps and AI agents, designed and built by Optystic.",
+      "Websites, web apps and automations, designed and built by Optystic.",
     url: "https://optystic.com",
     siteName: "Optystic",
     type: "website",
@@ -47,7 +39,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${marcellus.variable} ${interTight.variable} ${cormorant.variable} h-full antialiased`}
+      className={`${bricolage.variable} ${figtree.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

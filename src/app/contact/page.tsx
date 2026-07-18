@@ -3,7 +3,7 @@ import { CopyEmail } from "@/components/copy-email";
 import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
 import { Starfield } from "@/components/starfield";
-import { EMAIL, GITHUB_URL } from "@/lib/data";
+import { EMAIL } from "@/lib/data";
 import { ButtonLink, CornerMarks, SectionLabel } from "@/components/ui";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const FIT = [
   "A website that needs to look serious and load fast",
   "A web app, portal or dashboard your business runs on",
-  "A voice agent or WhatsApp assistant that answers for you",
+  "A phone or chat assistant that answers for you",
   "Something half built that needs rescuing",
 ];
 
@@ -25,18 +25,18 @@ export default function ContactPage() {
       <Nav />
       <main className="relative flex-1 overflow-hidden">
         <Starfield />
-        <div className="relative mx-auto grid max-w-6xl gap-14 px-5 pb-24 pt-32 md:grid-cols-[1.2fr_1fr] md:gap-20 md:px-8 md:pt-44">
+        <div className="relative mx-auto grid max-w-6xl gap-14 px-5 pb-20 pt-28 md:grid-cols-[1.2fr_1fr] md:gap-20 md:px-8 md:pt-40">
           <div>
             <SectionLabel>Contact</SectionLabel>
-            <h1 className="mt-5 max-w-xl font-display text-4xl leading-[1.12] sm:text-5xl">
+            <h1 className="mt-5 max-w-xl font-display text-4xl font-semibold leading-[1.06] tracking-tight sm:text-5xl">
               Tell us what you are building
             </h1>
-            <p className="mt-6 max-w-lg leading-relaxed text-ink-soft">
+            <p className="mt-5 max-w-lg leading-relaxed text-ink-soft">
               One email is enough to start. Describe the idea in your own
               words, rough is fine. You will get a reply from the person who
               would actually build it, usually within a day.
             </p>
-            <ul className="mt-9 flex flex-col gap-3">
+            <ul className="mt-8 flex flex-col gap-3">
               {FIT.map((item) => (
                 <li key={item} className="flex items-start gap-3 text-sm leading-relaxed text-ink-soft">
                   <svg viewBox="0 0 16 16" className="mt-1 h-2.5 w-2.5 shrink-0 fill-planet-deep/70" aria-hidden="true">
@@ -55,34 +55,19 @@ export default function ContactPage() {
             </p>
             <a
               href={`mailto:${EMAIL}`}
-              className="mt-3 block break-all font-display text-2xl text-ink transition-colors hover:text-planet-deep"
+              className="mt-3 block break-all font-display text-2xl font-semibold tracking-tight text-ink transition-colors hover:text-planet-deep"
             >
               {EMAIL}
             </a>
             <div className="mt-6 flex flex-wrap gap-3">
-              <ButtonLink href={`mailto:${EMAIL}?subject=New%20project`} external>
+              <ButtonLink href={`mailto:${EMAIL}?subject=Consultation`} external>
                 Write the email
               </ButtonLink>
               <CopyEmail />
             </div>
-            <div className="mt-8 border-t border-line-soft pt-6 text-sm text-ink-soft">
-              <p>
-                Prefer to lurk first? The code lives on{" "}
-                <a
-                  href={GITHUB_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-planet-deep transition-colors hover:text-ink"
-                >
-                  GitHub
-                </a>
-                .
-              </p>
-              <p className="mt-3 text-xs text-ink-faint">
-                No forms, no ticket queues. A mail goes straight to the
-                builder.
-              </p>
-            </div>
+            <p className="mt-8 border-t border-line-soft pt-6 text-xs text-ink-faint">
+              No forms, no ticket queues. A mail goes straight to the builder.
+            </p>
           </div>
         </div>
       </main>

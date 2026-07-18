@@ -5,13 +5,6 @@ import { useEffect, useState } from "react";
 import { Logo } from "./logo";
 import { ButtonLink } from "./ui";
 
-const LINKS = [
-  { href: "/#work", label: "Work" },
-  { href: "/#services", label: "Services" },
-  { href: "/#process", label: "Process" },
-  { href: "/contact", label: "Contact" },
-];
-
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -45,17 +38,14 @@ export function Nav() {
         <Logo id="nav" className="text-[22px] md:text-2xl" />
 
         <div className="hidden items-center gap-8 md:flex">
-          {LINKS.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="text-sm text-ink-soft transition-colors hover:text-ink"
-            >
-              {l.label}
-            </Link>
-          ))}
+          <Link
+            href="/#work"
+            className="text-sm text-ink-soft transition-colors hover:text-ink"
+          >
+            Work
+          </Link>
           <ButtonLink href="/contact" size="sm">
-            Start a project
+            Get a consultation
           </ButtonLink>
         </div>
 
@@ -78,18 +68,22 @@ export function Nav() {
 
       {open && (
         <div className="flex flex-col border-t border-line-soft bg-paper px-5 pb-8 pt-3 md:hidden">
-          {LINKS.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="border-b border-line-soft py-4 font-display text-xl text-ink"
-            >
-              {l.label}
-            </Link>
-          ))}
+          <Link
+            href="/#work"
+            onClick={() => setOpen(false)}
+            className="border-b border-line-soft py-4 font-display text-xl font-semibold text-ink"
+          >
+            Work
+          </Link>
+          <Link
+            href="/contact"
+            onClick={() => setOpen(false)}
+            className="border-b border-line-soft py-4 font-display text-xl font-semibold text-ink"
+          >
+            Contact
+          </Link>
           <ButtonLink href="/contact" className="mt-6">
-            Start a project
+            Get a consultation
           </ButtonLink>
         </div>
       )}
