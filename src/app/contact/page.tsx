@@ -33,8 +33,7 @@ export default function ContactPage() {
             </h1>
             <p className="mt-5 max-w-lg leading-relaxed text-ink-soft">
               One email is enough to start. Describe the idea in your own
-              words, rough is fine. You will get a reply from the person who
-              would actually build it, usually within a day.
+              words, rough is fine. You will hear back within a day.
             </p>
             <ul className="mt-8 flex flex-col gap-3">
               {FIT.map((item) => (
@@ -66,7 +65,7 @@ export default function ContactPage() {
               <CopyEmail />
             </div>
             <p className="mt-8 border-t border-line-soft pt-6 text-xs text-ink-faint">
-              No forms, no ticket queues. A mail goes straight to the builder.
+              No forms, no ticket queues.
             </p>
           </div>
         </div>

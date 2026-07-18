@@ -19,15 +19,15 @@ export function Cta() {
               Have something to build?
             </h2>
             <p className="mx-auto mt-4 max-w-md leading-relaxed text-night-ink-soft">
-              Tell us what you have in mind. You will hear back from a real
-              person within a day.
+              Tell us what you have in mind. You will hear back within a day.
             </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <ButtonLink href="/contact" variant="light">
+            <div className="mt-8 flex justify-center">
+              <ButtonLink
+                href={`mailto:${EMAIL}?subject=Consultation`}
+                variant="light"
+                external
+              >
                 Get a consultation
-              </ButtonLink>
-              <ButtonLink href={`mailto:${EMAIL}`} variant="ghostLight" external>
-                {EMAIL}
               </ButtonLink>
             </div>
           </div>

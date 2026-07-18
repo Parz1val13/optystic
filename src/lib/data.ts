@@ -42,34 +42,33 @@ export const services = [
       "Bookings, payments, dashboards, portals. The stuff you still do by hand, turned into something that runs itself.",
   },
   {
-    title: "Automation",
+    title: "AI and automation",
     blurb:
-      "An assistant that answers your phone and chats at 3am, takes the booking and never calls in sick.",
+      "AI built into your daily work. The repetitive parts get handled for you, with solutions shaped around your business.",
   },
 ];
 
 export const processSteps = [
   {
-    title: "We talk",
-    blurb:
-      "A short call or a few messages. You say what you need, we say honestly if we can do it.",
+    title: "We have a chat",
+    blurb: "You tell us what you need. A short call or a few messages is enough.",
+  },
+  {
+    title: "We scope it",
+    blurb: "A clear project scope, with examples of how yours will look.",
   },
   {
     title: "You get a price",
-    blurb: "One fixed price and a real date, in writing, before any work starts.",
+    blurb: "One price on that scope, agreed before any work starts.",
   },
   {
-    title: "We build",
+    title: "We build and polish",
     blurb:
-      "You get links to click while it takes shape. No big reveal at the end.",
-  },
-  {
-    title: "We polish",
-    blurb: "Tested on real phones and laptops until nothing wobbles.",
+      "You watch it take shape, and we polish as many rounds as it takes to make it perfect.",
   },
   {
     title: "It goes live",
     blurb:
-      "On your domain, keys handed over. We stay reachable after launch.",
+      "On your domain and your servers. We can manage it for you after, if you want.",
   },
 ];

@@ -11,9 +11,6 @@ export function Work() {
         <h2 className="mt-5 max-w-2xl font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-[2.75rem]">
           Real projects, live right now
         </h2>
-        <p className="mt-4 max-w-xl leading-relaxed text-ink-soft">
-          Every card opens the actual site.
-        </p>
       </Reveal>
 
       <div className="mt-10 grid gap-6 md:grid-cols-2">
@@ -65,10 +62,6 @@ export function Work() {
           </Reveal>
         ))}
       </div>
-
-      <p className="mt-8 text-xs text-ink-faint">
-        More projects get added as clients give the nod.
-      </p>
     </section>
   );
 }

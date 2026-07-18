@@ -9,8 +9,7 @@ export function Footer() {
         <div className="max-w-sm">
           <Logo id="footer" className="text-2xl" />
           <p className="mt-4 text-sm leading-relaxed text-ink-soft">
-            Websites, web apps and automations. Built by the person you talk
-            to, and kept running after launch.
+            Websites, web apps and AI solutions.
           </p>
         </div>
         <div className="flex flex-col gap-6 text-sm sm:flex-row sm:gap-14">
@@ -32,9 +31,8 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-line-soft">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-5 text-xs text-ink-faint md:px-8">
+        <div className="mx-auto px-5 py-5 text-xs text-ink-faint md:px-8 max-w-6xl">
           <p>© 2026 Optystic. All rights reserved.</p>
-          <p className="hidden sm:block">Designed and built in house.</p>
         </div>
       </div>
     </footer>
