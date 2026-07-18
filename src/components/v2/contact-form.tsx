@@ -3,9 +3,7 @@
 import { useState } from "react";
 import { EMAIL } from "@/lib/data";
 
-/* shortcut: placeholder endpoint. Create a free form at formspree.io and
-   replace YOUR_FORM_ID, or submissions will fail with the error message. */
-const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+const FORM_ENDPOINT = "/api/contact";
 
 const field =
   "w-full rounded-xl border border-line bg-paper px-4 py-3 text-sm text-ink placeholder:text-ink-faint";
