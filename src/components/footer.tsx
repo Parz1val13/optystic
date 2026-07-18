@@ -9,8 +9,8 @@ export function Footer() {
         <div className="max-w-sm">
           <Logo id="footer" className="text-2xl" />
           <p className="mt-4 text-sm leading-relaxed text-ink-soft">
-            A small studio building websites, web apps and automations.
-            Everything we ship stays live.
+            Websites, web apps and automations. Built by the person you talk
+            to, and kept running after launch.
           </p>
         </div>
         <div className="flex flex-col gap-6 text-sm sm:flex-row sm:gap-14">

@@ -14,13 +14,13 @@ const figtree = Figtree({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://optystic.com"),
-  title: "Optystic | Web studio",
+  title: "Optystic | Websites and software, built properly",
   description:
-    "Optystic is a small studio that designs and builds websites, web apps and automations. You deal directly with the builder, and every project here is live.",
+    "Optystic builds websites, web apps and automations. You talk directly to the person who builds it, and every project shown is live.",
   openGraph: {
-    title: "Optystic | Web studio",
+    title: "Optystic | Websites and software, built properly",
     description:
-      "Websites, web apps and automations, designed and built by Optystic.",
+      "Websites, web apps and automations, built properly by Optystic.",
     url: "https://optystic.com",
     siteName: "Optystic",
     type: "website",

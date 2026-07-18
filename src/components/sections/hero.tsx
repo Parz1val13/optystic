@@ -28,15 +28,15 @@ export function Hero() {
         </h1>
 
         <p className="mt-5 max-w-lg text-base leading-relaxed text-ink-soft sm:text-lg">
-          Optystic is a small studio you deal with directly. Everything on this
-          page is live right now.
+          You talk directly to the person who builds it. The proof is below,
+          live on the internet.
         </p>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <ButtonLink href="/contact">Get a consultation</ButtonLink>
           <ButtonLink href="/#work" variant="ghost">
             See the work
           </ButtonLink>
+          <ButtonLink href="/contact">Get a consultation</ButtonLink>
         </div>
       </div>
     </section>

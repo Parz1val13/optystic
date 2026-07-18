@@ -34,17 +34,17 @@ export const services = [
   {
     title: "Websites",
     blurb:
-      "Company sites and pages that load fast, read well and hold up on any screen.",
+      "A site people trust the moment it loads. Built to win you work, not to tick a box.",
   },
   {
     title: "Web apps",
     blurb:
-      "Bookings, dashboards, portals and payments. The tools a business actually runs on.",
+      "Bookings, payments, dashboards, portals. The stuff you still do by hand, turned into something that runs itself.",
   },
   {
     title: "Automation",
     blurb:
-      "Phone and chat assistants, plus the quiet plumbing that saves hours every week.",
+      "An assistant that answers your phone and chats at 3am, takes the booking and never calls in sick.",
   },
 ];
 
