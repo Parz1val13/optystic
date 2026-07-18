@@ -5,11 +5,70 @@
  * built on the ink color (same as the primary button), and larger cards when
  * open (scaled up, draggable side to side like a hand of big previews). */
 import { useEffect, useState } from "react";
-import { motion } from "motion/react";
-import { projects } from "@/lib/data";
+import { motion, useDragControls, type PanInfo } from "motion/react";
+import { projects, type Project } from "@/lib/data";
 import { Planet } from "../planet";
 
 const dragHintText = "Drag any project down to close";
+
+// clicking still triggers a few px of pointer movement; a low threshold makes
+// that register as a drag, so the card visibly jumps then springs back. This
+// keeps drag reserved for a deliberate "grab and pull" gesture.
+const DRAG_ENGAGE_THRESHOLD = 12;
+
+type ProjectCardProps = {
+  p: Project;
+  isFolderOpen: boolean;
+  onHoverStart: () => void;
+  onHoverEnd: () => void;
+  onOpenProject: () => void;
+  onCloseDrag: (info: PanInfo) => void;
+  animateTarget: Record<string, number>;
+};
+
+function ProjectCard({
+  p,
+  isFolderOpen,
+  onHoverStart,
+  onHoverEnd,
+  onOpenProject,
+  onCloseDrag,
+  animateTarget,
+}: ProjectCardProps) {
+  const dragControls = useDragControls();
+
+  return (
+    <motion.div
+      drag={isFolderOpen}
+      dragListener={false}
+      dragControls={dragControls}
+      dragSnapToOrigin={true}
+      onPointerDown={(e) => {
+        if (isFolderOpen) dragControls.start(e, { distanceThreshold: DRAG_ENGAGE_THRESHOLD });
+      }}
+      onDragEnd={(e, info) => onCloseDrag(info)}
+      onTap={onOpenProject}
+      onHoverStart={onHoverStart}
+      onHoverEnd={onHoverEnd}
+      className={`absolute bottom-0 h-80 w-64 origin-bottom overflow-hidden rounded-xl border border-line bg-paper shadow-[0_20px_40px_rgba(20,32,44,0.3)] ${isFolderOpen ? "pointer-events-auto cursor-grab active:cursor-grabbing" : "pointer-events-none"}`}
+      animate={animateTarget}
+      whileDrag={isFolderOpen ? { scale: (animateTarget.scale ?? 1) + 0.08, rotate: 5, zIndex: 150 } : {}}
+      transition={{ type: "spring", stiffness: 350, damping: 30 }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={p.image} alt={`Screenshot of ${p.name}`} className="pointer-events-none h-44 w-full object-cover object-top" />
+      <div className="pointer-events-none flex h-36 flex-col px-4 py-3 text-left">
+        <p className="font-display text-lg font-semibold tracking-tight text-ink">
+          {p.name}
+        </p>
+        <p className="mt-1 line-clamp-3 text-xs leading-relaxed text-ink-soft">
+          {p.blurb}
+        </p>
+        <p className="mt-auto text-[11px] text-ink-faint">{p.domain}</p>
+      </div>
+    </motion.div>
+  );
+}
 
 export function WorkFolder() {
   const [isFolderOpen, setIsFolderOpen] = useState(false);
@@ -60,53 +119,40 @@ export function WorkFolder() {
               const openX = offset * spread;
               const openRotate = 0;
 
+              const animateTarget = !isFolderOpen ? {
+                y: stackY,
+                x: stackX,
+                rotate: stackRotate,
+                scale: stackScale,
+                zIndex: i + 10
+              } : {
+                y: openY,
+                x: openX,
+                rotate: openRotate,
+                scale: hoveredDomain === p.domain ? openScale + 0.05 : openScale,
+                zIndex: hoveredDomain === p.domain ? 100 : 50
+              };
+
               return (
-                <motion.div
+                <ProjectCard
                   key={p.domain}
-                  drag={isFolderOpen ? true : false}
-                  dragSnapToOrigin={true}
-                  onDragEnd={(e, info) => {
+                  p={p}
+                  isFolderOpen={isFolderOpen}
+                  animateTarget={animateTarget}
+                  onHoverStart={() => setHoveredDomain(p.domain)}
+                  onHoverEnd={() => setHoveredDomain(null)}
+                  onOpenProject={() => {
+                    if (!isFolderOpen) return;
+                    setHoveredDomain(null);
+                    window.open(p.url, "_blank", "noopener,noreferrer");
+                  }}
+                  onCloseDrag={(info) => {
                     if (info.offset.y > 100 && isFolderOpen) {
                       setIsFolderOpen(false);
                       setHoverFolder(false);
                     }
                   }}
-                  onTap={() => {
-                    if (!isFolderOpen) return;
-                    setHoveredDomain(null);
-                    window.open(p.url, "_blank", "noopener,noreferrer");
-                  }}
-                  onHoverStart={() => setHoveredDomain(p.domain)}
-                  onHoverEnd={() => setHoveredDomain(null)}
-                  className={`absolute bottom-0 h-80 w-64 origin-bottom overflow-hidden rounded-xl border border-line bg-paper shadow-[0_20px_40px_rgba(20,32,44,0.3)] ${isFolderOpen ? "pointer-events-auto cursor-grab active:cursor-grabbing" : "pointer-events-none"}`}
-                  animate={!isFolderOpen ? {
-                    y: stackY,
-                    x: stackX,
-                    rotate: stackRotate,
-                    scale: stackScale,
-                    zIndex: i + 10
-                  } : {
-                    y: openY,
-                    x: openX,
-                    rotate: openRotate,
-                    scale: hoveredDomain === p.domain ? openScale + 0.05 : openScale,
-                    zIndex: hoveredDomain === p.domain ? 100 : 50
-                  }}
-                  whileDrag={isFolderOpen ? { scale: openScale + 0.08, rotate: 5, zIndex: 150 } : {}}
-                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={p.image} alt={`Screenshot of ${p.name}`} className="pointer-events-none h-44 w-full object-cover object-top" />
-                  <div className="pointer-events-none flex h-36 flex-col px-4 py-3 text-left">
-                    <p className="font-display text-lg font-semibold tracking-tight text-ink">
-                      {p.name}
-                    </p>
-                    <p className="mt-1 line-clamp-3 text-xs leading-relaxed text-ink-soft">
-                      {p.blurb}
-                    </p>
-                    <p className="mt-auto text-[11px] text-ink-faint">{p.domain}</p>
-                  </div>
-                </motion.div>
+                />
               );
             })}
           </div>
